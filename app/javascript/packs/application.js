@@ -17,3 +17,5 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 import 'bootstrap'
+
+const button = document.createElement("button")
