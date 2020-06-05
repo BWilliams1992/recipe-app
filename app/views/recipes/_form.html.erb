@@ -16,20 +16,30 @@
       <div class="col-2">
        Ingredients:
       </div>
-      <table class="col-10">
-        <tr class="row"> 
-          <th class="col-8">Name</th>
-          <th class="col-2">Amount</th>
-          <th class="col-2">Measure</th>
-        </tr>
-        <%= f.fields_for :ingredients do |ingredients_form| %> 
-          <tr class="row">
-            <td class="col-8"><%= ingredients_form.text_field :name, class:"form-control" %> </td>
-            <td class="col-2"><%= ingredients_form.text_field :amount, class:"form-control" %> </td>
-            <td class="col-2"><%= ingredients_form.text_field :measure, class:"form-control" %> </td>
+      <div class="col-10" data-controller="nested-form">
+
+        <template data-target="nested-form.template"> 
+          <%= f.fields_for :ingredients, Ingredient.new, child_index: 'TEMPLATE_RECORD' do |ingredient| %>
+            <%= render 'ingredients_fields', ingredients_form: ingredient %>
+          <% end %>
+        </template>
+        <div class="row justify-content-end">
+        <table id="ingredients-table" class="col-12">
+          <tr class="row"> 
+            <th class="col-8">Name</th>
+            <th class="col-2">Amount</th>
+            <th class="col-2" colspan="2">Measure</th>
           </tr>
-        <% end %>
-      </table>
+          <%= f.fields_for :ingredients do |ingredients_form| %> 
+            <%= render 'ingredients_fields', ingredients_form: ingredients_form %>
+          <% end %>
+        </table>
+        </div>
+        <div class="row mt-2" data-target="nested-form.add_ingredient">
+          <%= link_to "Add Ingredient", '#',class:"btn btn-success", data: { action: "nested-form#add_association" } %>
+        </div>
+        
+      </div>
     </div>
 
       <div class="form-group row">

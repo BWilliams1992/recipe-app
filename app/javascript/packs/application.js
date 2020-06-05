@@ -19,3 +19,4 @@ require("channels")
 import 'bootstrap'
 
 const button = document.createElement("button")
+import "controllers"

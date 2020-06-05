@@ -7,12 +7,17 @@
       <div class="row"> 
         Description: <%= @recipe.description %> 
       </div>
-      <div class="row border-top pt-1">
-        <div class="col-4">
+      <div class="row border-top pt-3 mt-1">
+        <div class="col-4 border-right">
           Ingredients:
           <ul>
             <% @recipe.ingredients.each do |ingredient| %>
-              <li><%= ingredient.name %></li>
+              <li>
+                <div class="row justify-content-between">
+                  <div class="col-9"><%= ingredient.name %></div> 
+                  <div class="col-3 text-right"><%= ingredient.amount %> <%= ingredient.measure if ingredient.measure? %></div>
+                </div> 
+              </li>
             <% end %>
           </ul>
         </div>
