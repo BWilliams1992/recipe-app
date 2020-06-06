@@ -42,9 +42,14 @@
       </div>
     </div>
 
-      <div class="form-group row">
+    <div class="form-group row">
       <%= f.label :method, class:"col-form-label col-2" %>
       <%= f.text_area :method,rows: 6, class:"form-control col-10" %>
+    </div>
+
+    <div class="form-group-row">
+      <%= f.label :private, class:"col-form-label col-2" %>
+      <%= f.check_box :private %>
     </div>
 
     <div class="form-group row justify-content-end">

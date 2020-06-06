@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-  <% @recipes.in_groups_of(3, false) do |recipe_group| %>
+  <% @publicRecipes.in_groups_of(3, false) do |recipe_group| %>
     <div class="row justify-content-between">
       <% recipe_group.each do |recipe| %>
         <div class="card m-2" style="width: 18rem;">
@@ -8,7 +8,9 @@
             <h5 class="card-title"><%= recipe.title %></h5>
             <p class="card-text"><%= truncate(recipe.description, length:100) if recipe.description? %> </p>
             <p class="card-text">By: <%= recipe.user.email %> </p>
-            <%= link_to "View", recipe, class: "btn btn-primary" %>
+            <% if can? :read, recipe %>
+              <%= link_to "View", recipe, class: "btn btn-primary" %>
+            <% end %>
           </div>
         </div>
       <% end %>

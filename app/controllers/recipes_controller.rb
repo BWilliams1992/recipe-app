@@ -2,6 +2,7 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def new 
+    authorize! :create, Recipe, message: "Please sign in to create recipes"
     @recipe = Recipe.new
     2.times { @recipe.ingredients.build }
   end
@@ -18,13 +19,16 @@ class RecipesController < ApplicationController
   end
 
   def index 
-    @recipes = Recipe.all
+    @allRecipes = Recipe.all
+    @publicRecipes = @allRecipes.select{ |recipe| !recipe.private? }
   end
 
   def show 
+    authorize! :read, @recipe
   end
 
   def edit
+    authorize! :edit, @recipe, message: "Cannot edit a recipe you do not own!"
   end
 
   def update
@@ -49,7 +53,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params 
-      params.require(:recipe).permit(:title, :description, :method, ingredients_attributes:[:id, :name, :amount, :measure, :_destroy])
+      params.require(:recipe).permit(:title, :description, :method, :private, ingredients_attributes:[:id, :name, :amount, :measure, :_destroy])
     end
 
 end
