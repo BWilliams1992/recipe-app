@@ -1,0 +1,6 @@
+<%= form_with(url: recipe_path(recipe), method: 'post',local: true) do %>
+  <%= label_tag(:collection_id, "Collection")%>
+  <%= select_tag(:collection_id, options_for_select(collections_to_options_array(collections))) %>
+  <%= hidden_field_tag(:recipe_id, recipe.id) %>
+  <%= submit_tag("Add to") %>
+<% end %>

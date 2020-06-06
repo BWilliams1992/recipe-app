@@ -25,6 +25,7 @@ class RecipesController < ApplicationController
 
   def show 
     authorize! :read, @recipe
+    @collections = current_user.collections
   end
 
   def edit
@@ -44,6 +45,15 @@ class RecipesController < ApplicationController
     @recipe.destroy
     flash[:notice] = "Recipe deleted!"
     redirect_to recipes_path
+  end
+
+  def add_to_collection
+    @recipe = Recipe.find(params[:recipe_id])
+    @collection = Collection.find(params[:collection_id])
+
+    @collection.recipes << @recipe
+
+    redirect_to @collection
   end
 
   private

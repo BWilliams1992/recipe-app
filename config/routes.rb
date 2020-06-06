@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   root "welcome#home"
   resources :recipes
   resources :users, only: [:show, :index]
+  resources :collections
+  post 'recipes/:id', to: 'recipes#add_to_collection'
 end

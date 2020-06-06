@@ -1,0 +1,4 @@
+<h1> Listing collections </h1>
+<% @collections.each do |collection| %>
+  <%= link_to collection.title, collection %><br />
+<% end %>

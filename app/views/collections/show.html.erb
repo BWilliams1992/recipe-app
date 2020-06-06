@@ -1,0 +1,4 @@
+<h1> <%= @collection.title %> </h1>
+<% @collection.recipes.each do |recipe| %>
+  <%= recipe.title %> <br />
+<% end %>
