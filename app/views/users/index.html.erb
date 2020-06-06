@@ -1,0 +1,4 @@
+<h1>Listing all users </h1>
+<% @users.each do |user|%>
+  <%= link_to (user.username? ? user.username : user.email), user, class:"badge badge-primary" %> <br/>
+<% end %>
