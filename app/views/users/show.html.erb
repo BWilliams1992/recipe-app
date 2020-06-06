@@ -1,5 +1,16 @@
-<%= @user.email %>
+<div class="card">
+  <h5 class="card-header"><%=  @user.username? ? @user.username : "Profile" %></h5>
+  <div class="card-body">
+    <%= link_to 'Edit account', edit_user_registration_path(@user), class:"btn btn-lg btn-warning" %>
+    <%= link_to 'Delete account', user_registration_path(@user), class:"btn btn-lg btn-danger", method: :delete %>
+    <h5 class="border-top mt-2"> Recipes: </h5>
+    <ul>
+    <% @user.recipes.each do |recipe| %>
+      <li><%= link_to recipe.title, recipe %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>
 
-<% @user.recipes.each do |recipe| %>
-  <%= recipe.title %>
-<% end %>
+
+
