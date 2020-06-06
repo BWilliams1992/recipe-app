@@ -11,7 +11,7 @@ class RecipesController < ApplicationController
     @recipe.user_id = current_user.id
     if @recipe.save
       flash[:notice] = "Recipe was succesfully created!"
-      redirect_to root_path
+      redirect_to @recipe
     else
       render 'new'
     end
