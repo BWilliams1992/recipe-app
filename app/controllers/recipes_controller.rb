@@ -12,6 +12,8 @@ class RecipesController < ApplicationController
     @recipe.user_id = current_user.id
     if @recipe.save
       flash[:notice] = "Recipe was succesfully created!"
+      @my_recipes = @recipe.user.collections.find_by_title("My Recipes")
+      @my_recipes.recipes << @recipe
       redirect_to @recipe
     else
       render 'new'
@@ -63,7 +65,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params 
-      params.require(:recipe).permit(:title, :description, :method, :private, ingredients_attributes:[:id, :name, :amount, :measure, :_destroy])
+      params.require(:recipe).permit(:title, :description, :method, :private, :main_image, ingredients_attributes:[:id, :name, :amount, :measure, :_destroy])
     end
 
 end

@@ -10,9 +10,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # #POST /resource
-  # def create
-  #   super
-  # end
+  def create 
+    super do |user|
+      if user.save
+        @collection = user.collections.create()
+        @collection.title = "My Recipes"
+        @collection.save
+      end
+    end
+  end
 
   # #GET /resource/edit
   # def edit

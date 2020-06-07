@@ -1,5 +1,6 @@
 class CollectionsController < ApplicationController
   before_action :find_collection, only:[:show, :edit, :update, :destroy ]
+  before_action :authenticate_user!
   def new
     @collection = Collection.new
   end
@@ -16,10 +17,11 @@ class CollectionsController < ApplicationController
   end
 
   def show
+    authorize! :read, Collection, message: "Can only view own collections!"
   end
   
   def index 
-    @collections = Collection.all
+    @collections = current_user.collections
   end
 
   def edit

@@ -12,6 +12,7 @@ class Ability
     if user
       can :manage, Recipe, user_id: user.id
       can :manage, User, id: user.id
+      can :manage, Collection, user_id: user.id
     end
 
     # Define abilities for the passed in user here. For example:

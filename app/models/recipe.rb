@@ -7,6 +7,8 @@ class Recipe < ApplicationRecord
   
   has_many :collection_recipes
   has_many :collections, through: :collection_recipes
+
+  has_one_attached :main_image
   
   validates :title, presence: true
   validates :method, presence: true
