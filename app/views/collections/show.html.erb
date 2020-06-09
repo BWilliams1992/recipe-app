@@ -1,4 +1,10 @@
 <h1> <%= @collection.title %> </h1>
-<% @collection.recipes.each do |recipe| %>
-  <%= recipe.title %> <br />
-<% end %>
+<div class="row justify-content-center">
+  <% @collection.recipes.in_groups_of(3, false) do |recipe_group| %>
+    <div class="row justify-content-between">
+      <% recipe_group.each do |recipe| %>
+        <%= render 'recipes/recipe-card', recipe: recipe %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

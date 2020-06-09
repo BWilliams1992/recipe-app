@@ -27,7 +27,9 @@ class RecipesController < ApplicationController
 
   def show 
     authorize! :read, @recipe
-    @collections = current_user.collections
+    if user_signed_in?
+      @collections = current_user.collections
+    end
   end
 
   def edit

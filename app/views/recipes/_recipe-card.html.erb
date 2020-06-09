@@ -1,0 +1,17 @@
+<div class="card m-2" style="width: 18rem;">
+  <% if recipe.main_image.present? %>
+    <div class="d-flex flex-wrap align-items-center bg-light" style="height: 18rem;">
+      <%= image_tag recipe.main_image, size:"18rem", class:"card-img-top align-middle" %>
+    </div>
+  <% else %>
+    <img src="https://source.unsplash.com/200x200/?food/<%= recipe.id %>" class="card-img-top" alt="...">
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title"><%= recipe.title %></h5>
+    <p class="card-text"><%= truncate(recipe.description, length:100) if recipe.description? %> </p>
+    <p class="card-text">By: <%= recipe.user.username.present? ? recipe.user.username : recipe.user.email %> </p>
+    <% if can? :read, recipe %>
+      <%= link_to "View", recipe, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
