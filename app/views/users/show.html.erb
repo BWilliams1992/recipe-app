@@ -1,10 +1,14 @@
 <div class="card">
   <h5 class="card-header"><%=  @user.username? ? @user.username : "Profile" %></h5>
   <div class="card-body">
-    <% if can? :manage, @user %>
+    <% if (can? :manage, @user) || (user_signed_in? && current_user.admin?) %>
       <div class= "border-bottom mb-2">
+        <% if can? :manage, @user %>
         <%= link_to 'Edit account', edit_user_registration_path(@user), class:"btn btn-lg btn-warning" %>
-        <%= link_to 'Delete account', user_registration_path(@user), class:"btn btn-lg btn-danger", method: :delete %>
+        <% end %>
+        <% if current_user.admin? %>
+          <%= link_to 'Delete account', user_path(@user), method: :delete, class:"btn btn-lg btn-danger", data:{ confirm: "Are you sure?"} %>
+        <% end %>
       </div>
     <% end %>
     <h5> Recipes: </h5>

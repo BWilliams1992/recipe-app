@@ -1,9 +1,23 @@
-<div class="row justify-content-center">
-  <% @publicRecipes.in_groups_of(3, false) do |recipe_group| %>
-    <div class="row justify-content-between">
-      <% recipe_group.each do |recipe| %>
-        <%= render 'recipe-card', recipe: recipe %>
-      <% end %>
+<div class="container">
+  <h1 class="d-flex justify-content-center border-bottom border-dark pb-1">Browsing recipes</h1>
+    <div class="row justify-content-center">
+      <div class="flickr_pagination">
+        <%= will_paginate @recipes, :container => false %>
+      </div>
     </div>
-  <% end %>
+    <% @recipes.in_groups_of(3, false) do |recipe_group| %>
+      <div class="row justify-content-around">
+        <% recipe_group.each do |recipe| %>
+          <%= render 'recipe-card', recipe: recipe %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="row justify-content-center p-2 mt-1">
+      <%= link_to "Create Recipe", new_recipe_path, class: "btn btn-lg btn-primary" %>
+    </div>
+    <div class="row justify-content-center">
+      <div class="flickr_pagination">
+        <%= will_paginate @recipes, :container => false %>
+      </div>
+    </div>
 </div>

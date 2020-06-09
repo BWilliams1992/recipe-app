@@ -15,6 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if user.save
         @collection = user.collections.create()
         @collection.title = "My Recipes"
+        @collection.description = "This collection is managed by the app. Recipes that you create are automatically added to this collection"
         @collection.save
       end
     end

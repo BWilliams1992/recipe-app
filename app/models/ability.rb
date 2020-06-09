@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
 
-    #user ||= User.new
+    user ||= User.new
 
     can :read, Recipe, private: false
 
@@ -13,6 +13,11 @@ class Ability
       can :manage, Recipe, user_id: user.id
       can :manage, User, id: user.id
       can :manage, Collection, user_id: user.id
+    end
+
+    if user.admin? 
+      can :destroy, Recipe
+      can :destroy, User
     end
 
     # Define abilities for the passed in user here. For example:

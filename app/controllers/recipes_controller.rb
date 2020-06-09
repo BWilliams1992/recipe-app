@@ -21,8 +21,7 @@ class RecipesController < ApplicationController
   end
 
   def index 
-    @allRecipes = Recipe.all
-    @publicRecipes = @allRecipes.select{ |recipe| !recipe.private? }
+    @recipes = Recipe.where(private: false).paginate(page:params[:page], per_page: 6)
   end
 
   def show 

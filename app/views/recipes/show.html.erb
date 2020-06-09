@@ -1,20 +1,25 @@
 <div class="card">
   <div class="card-header">
-    <%= @recipe.title %>
+    <h2><%= @recipe.title %></h2>
   </div>
   <div class="card-body ">
     <div class="container">
-      <div class="row"> 
-        Description: <%= @recipe.description %> 
+      <div class="row">
+        <% if @recipe.main_image.present? %>
+          <div class="col-4"> <%= image_tag @recipe.main_image, class:"img-fluid img-thumbnail mb-2" %> </div>
+        <% else %>
+          <div class="col-4 d-flex justify-content-center"> <%= image_tag 'recipe-placeholder-202x202.jpg', class:"img-fluid img-thumbnail mb-2" %> </div>
+        <% end %>
+        <div class="col-8"> <h3> Description: </h3> <%= @recipe.description %> </div>
       </div>
       <div class="row border-top pt-3 mt-1">
         <div class="col-4 border-right">
-          Ingredients:
+          <h4>Ingredients:</h4>
           <ul>
             <% @recipe.ingredients.each do |ingredient| %>
               <li>
                 <div class="row justify-content-between">
-                  <div class="col-9"><%= ingredient.name %></div> 
+                  <div class="col-9 text-capitalize"><%= ingredient.name %></div> 
                   <div class="col-3 text-right"><%= ingredient.amount %> <%= ingredient.measure if ingredient.measure? %></div>
                 </div> 
               </li>
@@ -22,7 +27,7 @@
           </ul>
         </div>
         <div class="col-8">
-          Method: 
+          <h4>Method:</h4>
           <%= simple_format(@recipe.method) %>
         </div>
       </div>
@@ -32,8 +37,10 @@
     <div class="card-footer">
       <div class="row justify-content-between">
         <%= render 'add_to_collection_form', collections: @collections, recipe: @recipe if user_signed_in?%>
-        <% if can? :manage, @recipe %>
+        <% if can? :update, @recipe %>
           <%= link_to "Edit", edit_recipe_path(@recipe), class:"btn btn-primary btn-lg col-2" %>
+        <% end %>
+        <% if can? :destroy, @recipe %>
           <%= link_to "Delete", recipe_path(@recipe), method: :delete, class:"btn btn-danger btn-lg col-2", data: { confirm: "Are you sure?" } %>
         <% end %>
       </div>
