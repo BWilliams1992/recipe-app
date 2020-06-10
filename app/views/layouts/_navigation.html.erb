@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark-orange">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark-orange sticky-top">
   <%= link_to "Recipe App", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -49,7 +49,9 @@
       <% end %>
       <% if !user_signed_in? %>
         <li class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link"%>
+          <a href='#' class="nav-link" data-toggle="modal" data-target="#exampleModal">
+            Login
+          </a>
         </li>
         <li class="nav-item">
           <%= link_to "Sign up", new_user_registration_path, class: "nav-link"%>
@@ -58,3 +60,5 @@
     </ul>
   </div>
 </nav>
+
+<%= render 'layouts/login-modal'%>

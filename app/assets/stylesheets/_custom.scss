@@ -16,7 +16,7 @@ body {
 .bg-light-orange {
   background-color: $light-orange;
 }
-
+//Cards
 .card-header {
   background-color: $dark-orange;
 }
@@ -28,7 +28,27 @@ body {
 .card-body {
   background-color: $orange;
 }
-
+//Jumbotron
+#welcome-jumbotron {
+  background-image: asset-url(welcome-jumbotron-bg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 450px;
+  color: whitesmoke;
+}
+//Footer
+.page-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: $dark-orange;
+  text-align: center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
 //Dropdown
 
 .dropdown-item:hover {
