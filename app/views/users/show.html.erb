@@ -1,6 +1,19 @@
 <div class="card">
   <h5 class="card-header"><%=  @user.username? ? @user.username : "Profile" %></h5>
   <div class="card-body">
+    <div class="row border-bottom border-dark p-1">
+      <div class="border-right border-dark justify-content-center">
+      <% if @user.avatar.present? %>
+        <%= image_tag @user.avatar, size: "200x200", class: "border bg-white m-2 p-1 shadow" %>
+      <% else %>
+        <%= image_tag 'avatar.png', size: "200x200", class: "border bg-white m-2 p-1 shadow" %>
+      <% end%>
+      </div>
+      <div class="col-9">
+      <h3>Bio: </h3>
+        <%= @user.bio %>
+      </div>
+    </div>
     <% if (can? :manage, @user) || (user_signed_in? && current_user.admin?) %>
       <div class= "border-bottom mb-2">
         <% if can? :manage, @user %>
