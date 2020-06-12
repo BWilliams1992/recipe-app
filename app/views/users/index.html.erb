@@ -1,4 +1,16 @@
 <h1>Listing all users </h1>
 <% @users.each do |user|%>
-  <%= link_to (user.username? ? user.username : user.email), user, class:"badge badge-primary" %> <br/>
+  <div class="card mb-2">
+    <div class="card-header">
+          <% if user.avatar.present? %>
+            <%= image_tag user.avatar, size:"50x50", class:"img-thumbnail" %>
+          <% else %>
+            <%= image_tag 'avatar.png', size:"50x50", class:"img-thumbnail" %>
+          <% end %>
+          <%= link_to (user.username? ? user.username : user.email), user %>
+    </div>
+    <div class="card-body">
+    Recipes: <%= user.recipes.length%>
+    </div>
+  </div>
 <% end %>
