@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :index, :destroy]
   resources :collections
   post 'recipes/:id', to: 'recipes#add_to_collection'
+  post 'collections/:id', to: 'collections#remove_from_collection'
 end

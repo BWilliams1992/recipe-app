@@ -42,6 +42,15 @@ class CollectionsController < ApplicationController
     redirect_to collections_path
   end
 
+  def remove_from_collection
+    find_collection
+    @recipe = Recipe.find(params[:recipe_id])
+    if @recipe
+      @collection.recipes.delete(@recipe)
+      redirect_to @collection
+    end
+  end
+
   private
 
     def collection_params

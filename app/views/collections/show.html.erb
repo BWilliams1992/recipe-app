@@ -1,10 +1,21 @@
-<h1> <%= @collection.title %> </h1>
+<h1> <%= @collection.title %> </h1> 
+<%= link_to 'Edit', edit_collection_path(@collection) if @collection.title!="My Recipes" %>
 <div class="row justify-content-center">
   <% @collection.recipes.in_groups_of(3, false) do |recipe_group| %>
     <div class="row justify-content-between">
       <% recipe_group.each do |recipe| %>
-        <%= render 'recipes/recipe-card', recipe: recipe %>
+        <div class="col">
+          <div class="row">
+            <%= render 'recipes/recipe-card', recipe: recipe %>
+          </div>
+          <div class="row justify-content-center">
+            <% if @collection.title!="My Recipes"%>
+              <%= render 'remove-from-collection-form', recipe: recipe %>
+            <% end%>
+          </div>
+        </div>
       <% end %>
     </div>
   <% end %>
 </div>
+<%= link_to "Back", collections_path %>
