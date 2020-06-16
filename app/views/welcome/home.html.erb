@@ -11,8 +11,15 @@
 
 <div>
   <h2>Blog: </h2>
-  <%= link_to "Create Article", new_article_path, class:"btn btn-lg btn-primary mb-3" if user_signed_in? && current_user.admin? %>
+  <%= link_to "Create Article", new_article_path, class:"btn btn-lg btn-primary" if user_signed_in? && current_user.admin? %>
+  <h3 class=" border-top border-dark mt-4">Pinned Articles </h3>
   <% @pinned.each do |article| %>
-    <%= render 'articles/pinned-article', article: article %>
+    <%= render 'articles/article', article: article %>
+  <% end %>
+  <div class="border-bottom border-dark mb-4"></div>
+  <% @articles.each do |article| %>
+    <% if !article.pinned %>
+      <%= render 'articles/article', article: article %>
+    <% end %>
   <% end %>
 </div>
