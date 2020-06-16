@@ -8,6 +8,7 @@ class Ability
     user ||= User.new
 
     can :read, Recipe, private: false
+    can :read, Article
 
     if user
       can :manage, Recipe, user_id: user.id
@@ -18,6 +19,7 @@ class Ability
     if user.admin? 
       can :destroy, Recipe
       can :destroy, User
+      can :manage, Article
     end
 
     # Define abilities for the passed in user here. For example:

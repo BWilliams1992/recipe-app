@@ -1,0 +1,6 @@
+<%= render 'article', article: @article %>
+<h4>Comments</h4>
+<% @article.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>
+<%= render 'comments/form' if user_signed_in? %>

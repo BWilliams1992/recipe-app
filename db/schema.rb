@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_12_162818) do
+ActiveRecord::Schema.define(version: 2020_06_16_112944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2020_06_12_162818) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "pinned"
+  end
+
   create_table "collection_recipes", force: :cascade do |t|
     t.integer "recipe_id"
     t.integer "collection_id"
@@ -46,6 +54,14 @@ ActiveRecord::Schema.define(version: 2020_06_12_162818) do
     t.string "title"
     t.text "description"
     t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.bigint "article_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -84,6 +100,7 @@ ActiveRecord::Schema.define(version: 2020_06_12_162818) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "collections", "users"
+  add_foreign_key "comments", "articles"
   add_foreign_key "ingredients", "recipes"
   add_foreign_key "recipes", "users"
 end

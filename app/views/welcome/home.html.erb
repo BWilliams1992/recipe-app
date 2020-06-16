@@ -1,10 +1,18 @@
 <div class="jumbotron mt-5" id="welcome-jumbotron">
   <h1 class="display-4">Welcome!</h1>
-  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <p class="lead">A simple app for people to share recipes</p>
   <hr class="my-4">
-  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-  <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Login
-  </button>
-  <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+  <p>Currently a work in progress.Check below for development blog/feature updates!</p>
+  <% if !user_signed_in? %>
+    <%= link_to "Sign-In", new_user_session_path, class: "btn btn-lg btn-primary"%>
+    <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
+</div>
+
+<div>
+  <h2>Blog: </h2>
+  <%= link_to "Create Article", new_article_path, class:"btn btn-lg btn-primary mb-3" if user_signed_in? && current_user.admin? %>
+  <% @pinned.each do |article| %>
+    <%= render 'articles/pinned-article', article: article %>
+  <% end %>
 </div>
