@@ -1,5 +1,11 @@
 <div class="container">
   <h1 class="d-flex justify-content-center border-bottom border-dark pb-1">Browsing recipes</h1>
+  <div>
+    <%= form_with(url: recipes_path, method: 'get', local: true) do %>
+      <%= text_field_tag :search %>
+      <%= submit_tag  'Search'%>
+    <% end %>
+  </div>
     <div class="row justify-content-center">
       <div class="flickr_pagination">
         <%= will_paginate @recipes, :container => false %>

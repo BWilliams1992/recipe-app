@@ -21,7 +21,13 @@ class RecipesController < ApplicationController
   end
 
   def index 
-    @recipes = Recipe.where(private: false).paginate(page:params[:page], per_page: 6)
+    # if params[:search]
+    #   @parameter = params[:search].downcase
+    #   @recipes = Recipe.where("Lower(title) LIKE :search", search: @parameter).paginate(page:params[:page], per_page: 6)
+    # else
+    #   @recipes = Recipe.where(private: false).paginate(page:params[:page], per_page: 6)
+    # end
+    @recipes = Recipe.search(params[:search]).paginate(page:params[:page], per_page: 6)
   end
 
   def show 
