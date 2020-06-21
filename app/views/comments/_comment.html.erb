@@ -1,1 +1,9 @@
-<%= comment.body %>
+<div class="col-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 clas="card-title"><%= comment.user.username.present? ? comment.user.username : "Annon"  %> </h5>
+      <h6 class="card-subtitle"><%= time_ago_in_words(comment.created_at) %> ago </h6>
+      <%= comment.body %>
+    </div>
+  </div>
+</div>

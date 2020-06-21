@@ -1,9 +1,8 @@
-<%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
-  <p>
-    <%= form.label :body %> <br/>
-    <%= form.text_area :body %> <br/>
-  </p>
-  <p>
+<%= form_with(model: [ @article, @article.comments.build ], class:"col-4", local: true) do |form| %>
+  <div class="form-group">
+    <%= form.label :body, class:"form-label" %> <br/>
+    <%= form.text_area :body, class: "form-control" %> <br/>
+    <%= form.hidden_field :user_id, value: current_user.id%>
     <%= form.submit %>
-  </p>
+  </div>
 <% end %>
