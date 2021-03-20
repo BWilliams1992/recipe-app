@@ -1,6 +1,6 @@
 class IngredientsController < ApplicationController 
 
-  def reate
+  def create
     @ingredient = Ingredient.new(ingredient_params)
     @ingredient.save
   end
