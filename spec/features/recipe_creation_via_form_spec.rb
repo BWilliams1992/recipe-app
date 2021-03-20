@@ -4,7 +4,7 @@ feature "Creates a new recipe from the new recipe from which is saved to the dat
   scenario "successfully" do
     user = create(:user)
     login_as(user, :scope => :user)
-    
+
     visit new_recipe_path
 
     expect(page).to have_css 'h1', text:'Create Recipe'
@@ -18,6 +18,8 @@ feature "Creates a new recipe from the new recipe from which is saved to the dat
     click_on "Create Recipe"
 
     expect(Recipe.count).to eq(1)
+    expect(Recipe.first.title).to eq("Pizza")
+    expect(Recipe.first.description).to eq("It's a pizza")
 
   end
 end
