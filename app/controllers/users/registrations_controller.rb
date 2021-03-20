@@ -10,16 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # #POST /resource
-  def create 
-    super do |user|
-      if user.save
-        @collection = user.collections.create()
-        @collection.title = "My Recipes"
-        @collection.description = "This collection is managed by the app. Recipes that you create are automatically added to this collection"
-        @collection.save
-      end
-    end
-  end
+  # def create 
+  #   super do |user|
+  #     if user.save
+
+  #     end
+  #   end
+  # end
 
   # #GET /resource/edit
   # def edit

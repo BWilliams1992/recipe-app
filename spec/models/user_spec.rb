@@ -19,12 +19,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "after_create" do
-    xit "runs create_my_recipes_collection" do
-
-    end
-  end
-
   describe "methods" do
     context "create_my_recipes_collection" do
       it "creates the my recipes collection for the user which is managed by the application" do
