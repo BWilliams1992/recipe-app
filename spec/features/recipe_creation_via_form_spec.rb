@@ -12,7 +12,7 @@ feature "Creates a new recipe from the new recipe from which is saved to the dat
     fill_in "Title", with: "Pizza"
     fill_in "Description", with: "It's a pizza"
     fill_in "recipe_ingredients_attributes_0_name", with: "Pizza"
-    fill_in "recipe_ingredients_attributes_0_amount", with: 1
+    fill_in "recipe_recipe_ingredients_attributes_0_amount", with: 1
     fill_in "Method", with: "Put in oven and cook it"
 
     click_on "Create Recipe"
