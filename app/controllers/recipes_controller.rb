@@ -4,7 +4,9 @@ class RecipesController < ApplicationController
   def new 
     authorize! :create, Recipe, message: "Please sign in to create recipes"
     @recipe = Recipe.new
-    2.times { @recipe.ingredients.build }
+    @ingredient = @recipe.ingredients.build
+    @recipe_ingredient = @recipe.recipe_ingredients.build(recipe_id: @recipe.id, ingredient_id:@ingredient.id)
+
   end
 
   def create 
@@ -72,7 +74,7 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params 
-      params.require(:recipe).permit(:title, :description, :method, :private, :main_image, ingredients_attributes:[:id, :name, :amount, :measure, :_destroy])
+      params.require(:recipe).permit(:title, :description, :method, :private, :main_image, ingredients_attributes:[:id, :name, :_destroy])
     end
 
 end

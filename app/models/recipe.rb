@@ -1,9 +1,10 @@
 class Recipe < ApplicationRecord 
   belongs_to :user
+  has_many :recipe_ingredients
+  has_many :ingredients, through: :recipe_ingredients
 
-  has_many :ingredients, dependent: :destroy
-  accepts_nested_attributes_for :ingredients,
-  reject_if: lambda { |attributes| attributes['name'].blank? || attributes['amount'].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :ingredients
+  accepts_nested_attributes_for :recipe_ingredients
   
   has_many :collection_recipes
   has_many :collections, through: :collection_recipes
